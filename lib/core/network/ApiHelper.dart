@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../main.dart';
-import '../AppUrl/url.dart';
 
 showErrorDialogue(String error) {
   showDialog(
@@ -49,7 +48,7 @@ class ApiHelper {
   late Dio _dio;
   late LoggerDebug _logger;
 
-  static String baseUrl = AppUrl.BASE_URL;
+  static const String baseUrl = '/public/api';
 
   static final ApiHelper _instance = ApiHelper._internal();
   factory ApiHelper() => _instance;
@@ -161,14 +160,18 @@ class ApiHelper {
         // if (await _shouldRefreshToken()) {
         //   await _refreshToken();
         // }
-        if (await _shouldRefreshToken()) {
-          final refreshed = await _refreshToken();
-          if (refreshed) {
-            final newToken = await _getAuthToken();
-            if (newToken != null) {
-              options.headers['Authorization'] = 'Bearer $newToken';
-            }
-          }
+        // if (await _shouldRefreshToken()) {
+        //   final refreshed = await _refreshToken();
+        //   if (refreshed) {
+        //     final newToken = await _getAuthToken();
+        //     if (newToken != null) {
+        //       options.headers['Authorization'] = 'Bearer $newToken';
+        //     }
+        //   }
+        // }
+        final token = await _getAuthToken();
+        if (token != null) {
+          options.headers['Authorization'] = 'Bearer $token';
         }
         return handler.next(options);
       },
@@ -177,12 +180,13 @@ class ApiHelper {
           // Обработка ошибки авторизации
           // await _handleUnauthorized();
           // return handler.resolve(await _retry(e.requestOptions));
-          final refreshed = await _refreshToken();
-          if (refreshed) {
-            return handler.resolve(await _retry(e.requestOptions));
-          } else {
-            _handleUnauthorized();
-          }
+          // final refreshed = await _refreshToken();
+          // if (refreshed) {
+          //   return handler.resolve(await _retry(e.requestOptions));
+          // } else {
+          //   _handleUnauthorized();
+          // }
+          _handleUnauthorized();
         }
         return handler.next(e);
       },
@@ -351,6 +355,7 @@ class ApiHelper {
           e.type == DioExceptionType.unknown) {
         showErrorDialogue("تحقق من اتصالك بالإنترنت");
       } else if (e.response?.statusCode == 401) {
+        _handleUnauthorized();
         showErrorDialogue("جلسة الدخول انتهت، يرجى تسجيل الدخول مرة أخرى.");
       }
       // ✅ خطأ عام
