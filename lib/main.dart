@@ -43,10 +43,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'ERP',
-          home: MyWidget(),
           theme: StylesApp.instance.getLightTheme(context.locale),
-          // initialRoute: AppRoutes.init.initial,
-          // routes: AppRoutes.init.appRoutes,
+          initialRoute: AppRoutes.init.initial,
+          routes: AppRoutes.init.appRoutes,
           navigatorKey: navigator,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: context.localizationDelegates,
@@ -91,14 +90,5 @@ class _Unfocus extends StatelessWidget {
       },
       child: child,
     );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }

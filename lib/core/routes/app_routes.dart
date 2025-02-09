@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../features/new_server/presentation/pages/page_name.dart';
 import 'routes.dart';
 
 class AppRoutes {
   static AppRoutes get init => AppRoutes._internal();
-  String initial = NamedRoutes.i.sign_in;
+  String initial = NamedRoutes.i.test;
 
   AppRoutes._internal();
   Map<String, Widget Function(BuildContext context)> appRoutes = {
-    // NamedRoutes.i.test: (context) => FilterForm(),
+    NamedRoutes.i.test: (context) => MyWidget(),
     // NamedRoutes.i.sign_in: (context) => TestPage(),
     // NamedRoutes.i.welcome_view: (context) => const TestProvider(),
     // NamedRoutes.i.home_view: (context) => Testviewgetdata(),

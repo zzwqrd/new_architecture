@@ -36,18 +36,3 @@
 // │   │       ├── widgets/
 // │   │           ├── widget_name.dart
 // ├── injection_container.dart
-
-// test/
-// └── features/
-// └── feature_name/
-// └── data/
-// ├── models/
-// ├── repositories/
-// ├── dataSources/
-// └── domain/
-// ├── useCases/
-// ├── repositories/
-// └── presentation/
-// ├── bloc/
-// ├── pages/
-// ├── widgets/
