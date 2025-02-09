@@ -1,0 +1,1 @@
+// equatable, bloc, flutter_bloc, connectivity_plus, dartz, flutter_screenutil, easy_localization, carousel_slider, kiwi, shimmer, lottie, flash, flutter_svg_provider, freezed_annotation, json_annotation, flutter_spinkit, font_awesome_flutter, video_player, cached_network_image, flutter_local_notifications, provider, share_plus, url_launcher, encrypt, get_it, shared_preferences
